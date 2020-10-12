@@ -2,14 +2,29 @@ const express = require("express");
 // Middleware - Allow web app to make calls to our APIs
 const cors = require("cors");
 const pool = require("./db");
-
+const PORT = process.env.PORT || 5000;
+const path = require("path");
 // Run the express library 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-// ROUTES 
+// Set the environment in which our application will run in
+// Heroku will be in charge of our application environment
+// process.env.PORT 
+// PROCESS.env.NODE_ENV => production or undefined
+// This is because heroku will be in-charge of directing our request accurately to our port numnber
 
+if (process.env.NODE_ENV === "production") {
+    // server static content
+    // build folder in client folder contains all the static content that we build
+    // aim the index.html in it
+
+    // app.use(express.static) => allows us to serve static content that we specify in build folder
+    app.use(express.static(path.join(__dirname, "client/build")));
+}
+
+// ROUTES 
 // Create a todo
 app.post("/todos", async(req, res) => {
     try {
@@ -87,7 +102,7 @@ app.delete("/todos/:id", async (req, res) => {
 
 });
 
-app.listen(5000, () => {
-    console.log("Server has started on port 5000");
+app.listen(PORT, () => {
+    console.log(`Server has started on port ${PORT}`);
 });
 
