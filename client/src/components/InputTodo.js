@@ -16,7 +16,7 @@ const InputTodo = () => {
             // into something that we can POST
             // When user click "Add" button the POST requests fires off
             // and a task is added into our PSQL database
-            const response = await fetch("http://localhost:5000/todos", {
+            const response = await fetch("/todos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)

@@ -8,7 +8,7 @@ const ListTodos = () => {
     // Delete function
     const deleteTodo = async(id) => {
         try {
-            const deleteTodo = await fetch(`http://localhost:5000/todos/${id}`, {
+            const deleteTodo = await fetch(`/todos/${id}`, {
                  method: "DELETE"
             });
             setTodos(todos.filter(todo => 
@@ -23,12 +23,11 @@ const ListTodos = () => {
     const getTodos = async() => {
         try {
             // grab data from server, fetch is a get request
-            const response = await fetch("http://localhost:5000/todos");
+            const response = await fetch("/todos");
             // Have to parse because receiving json data
             const jsonData = await response.json();
             // Set the state of todos on the client side to whatever was fetched during the first render
             setTodos(jsonData);
-            console.log("EXECUTED!!! GET");
         } catch(err) {
             console.error(err.message);
         }
