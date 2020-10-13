@@ -6,6 +6,7 @@ const PORT = process.env.PORT || 5000;
 const path = require("path");
 // Run the express library 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
 
@@ -102,7 +103,12 @@ app.delete("/todos/:id", async (req, res) => {
 
 });
 
+// Catchall
+// If any other random route, client will be pointed back to index.html
+app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
+});
+
 app.listen(PORT, () => {
     console.log(`Server has started on port ${PORT}`);
 });
-
