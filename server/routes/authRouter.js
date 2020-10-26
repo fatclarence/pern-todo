@@ -1,4 +1,3 @@
-const pool = require("../db");
 const express = require("express");
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
@@ -6,6 +5,7 @@ const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 const jwtGenerator = require("../utils/jwtGenerator");
 const validator = require("../utils/validator");
+const authorization = require("../utils/authorization");
 const db = require("../db");
 
 // Registration

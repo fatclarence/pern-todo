@@ -6,15 +6,18 @@ import 'react-toastify/dist/ReactToastify.css';
 // Components
 import InputTodo from "./components/InputTodo";
 import ListTodos from "./components/ListTodos";
+import UserProvider from './utils/UserProvider';
 
 function App() {
   return (
   <Fragment>
-    <ToastContainer />
-    <div className="container">
-      <InputTodo />
-      <ListTodos />
-    </div>
+    <UserProvider>
+      <ToastContainer />
+      <div className="container">
+        <InputTodo />
+        <ListTodos />
+      </div>
+    </UserProvider>
   </Fragment>
   );
 }
