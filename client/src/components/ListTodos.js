@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import EditTodo from "./EditTodo";
 
 const ListTodos = () => {
@@ -14,7 +15,7 @@ const ListTodos = () => {
             setTodos(todos.filter(todo => 
                 todo.todo_id !== id
             ));
-            console.log(todos);
+            toast.warning("Deleted todo " + id);
         } catch(err) {
             console.error(err.message);
         }

@@ -81,7 +81,6 @@ app.put("/todos/:id", async(req, res) => {
                 id
             ]
         );
-
         res.json("Todo number " + id + " updated!");
     } catch (err) {
         console.error(err.message);
