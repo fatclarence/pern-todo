@@ -40,7 +40,7 @@ router.post("/register", validator, async (req, res) => {
 
         })
         .catch(error => {
-            console.log(error);
+            console.error(error.message);
         });
 
         const saltRound = 10;
@@ -75,12 +75,43 @@ router.post("/register", validator, async (req, res) => {
             console.error(error.message);
             res.status(500).json("Insertion fail possible server error");
         });
-
+        
     } catch (err) {
         console.error(err.message);
 
         // Post failure
         res.status(500).json("Server error: Check your internet connection!");
+    }
+});
+
+// Login
+router.post("/login", validator, async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        db.tx(async t => {
+            const user = await t.manyOrNone(`SELECT * FROM users WHERE username = $1`, [username]);
+            return {user}
+        })
+        .then(data => {
+            if (data.user.length === 0) {
+                return res.status(401).json("Invalid username");
+            } 
+            const validPassword = bcrypt.compare(password, data.user[0].password);
+
+            if (!validPassword) {
+                return res.status(401).json("Invalid password");
+            }
+
+            const token = jwtGenerator(data.user[0].username);
+            res.json({ token });
+        })
+        .catch(error => {
+            console.error(error.message);
+            res.status(500).json("Token failure possible server error"); 
+        });
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).json("Server error: Check your internet connection");
     }
 });
 

@@ -52,7 +52,7 @@ router.put("/:id", async(req, res) => {
 });
 
 // Delete a todo
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => { 
     const { id } = req.params;
     db.none(`DELETE FROM todo WHERE todo_id = $1`, [id])
     .then(() => {
