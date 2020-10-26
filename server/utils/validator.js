@@ -4,10 +4,7 @@ const validator = async (req, res, next) => {
         username,
         email,
         password,
-        confirmPassword,
-        country,
-        address,
-        role
+        confirmPassword
     } = req.body;
 
     // check if email provided is valid
@@ -17,7 +14,7 @@ const validator = async (req, res, next) => {
 
     if (req.path === "/register") {
         console.log(!email.length);
-        if (![email, username, password, confirmPassword, country, address, role].every(Boolean)) {
+        if (![username, email, password, confirmPassword].every(Boolean)) {
             // unauthenticated
             return res.status(401).json("Missing Credentials");
         } else if (!validEmail(email)) {
