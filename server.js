@@ -1,4 +1,5 @@
 const express = require("express");
+
 // Middleware - Allow web app to make calls to our APIs
 const cors = require("cors");
 const pool = require("./server/db");
