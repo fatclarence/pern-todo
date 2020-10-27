@@ -1,21 +1,19 @@
 import React, { Fragment } from 'react';
 import './App.css';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 // Components
-import InputTodo from "./components/InputTodo";
-import ListTodos from "./components/ListTodos";
+import UserProvider from './utils/UserProvider';
+import AppRouter from './routes/AppRouter';
 
 function App() {
   return (
-  <Fragment>
-    <ToastContainer />
-    <div className="container">
-      <InputTodo />
-      <ListTodos />
-    </div>
-  </Fragment>
+  <div>
+    <UserProvider>
+       <AppRouter />
+    </UserProvider>
+  </div>
   );
 }
 

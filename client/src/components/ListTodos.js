@@ -7,15 +7,15 @@ const ListTodos = () => {
     const[todos, setTodos] = useState([]);
 
     // Delete function
-    const deleteTodo = async(id) => {
+    const deleteTodo = async(id, description) => {
         try {
-            const deleteTodo = await fetch(`/todos/${id}`, {
+            const deleteTodo = await fetch(`/api/todos/${id}`, {
                  method: "DELETE"
             });
             setTodos(todos.filter(todo => 
                 todo.todo_id !== id
             ));
-            toast.warning("Deleted todo " + id);
+            toast.warning("Deleted todo \"" + description + "\"");
         } catch(err) {
             console.error(err.message);
         }
@@ -24,7 +24,7 @@ const ListTodos = () => {
     const getTodos = async() => {
         try {
             // grab data from server, fetch is a get request
-            const response = await fetch("/todos");
+            const response = await fetch("/api/todos");
             // Have to parse because receiving json data
             const jsonData = await response.json();
             // Set the state of todos on the client side to whatever was fetched during the first render
@@ -54,7 +54,7 @@ const ListTodos = () => {
                         <tr key={todo.todo_id}>
                             <td>{todo.description}</td>
                             <td><EditTodo todo={todo} /></td>
-                            <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id)}>Delete</button></td>
+                            <td><button className="btn btn-danger" onClick={() => deleteTodo(todo.todo_id, todo.description)}>Delete</button></td>
                         </tr>
                     ))}
                 </tbody>
