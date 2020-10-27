@@ -37,7 +37,7 @@ const ListTodos = () => {
     useEffect(() => {
         // every refresh render, execute these functions
         getTodos();
-    }, []);
+    }, [todos]);
 
     return (
         <Fragment>
