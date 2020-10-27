@@ -20,7 +20,7 @@ if (process.env.NODE_ENV === "production") {
 
 // ROUTES 
 app.get(Object.values(frontEndRoutes), (req, res) => {
-    res.sendFile(path.join(__dirname, "build/index.html"));
+    res.sendFile(path.join(__dirname, "client/build/index.html"));
 });
 
 // API endpoints
