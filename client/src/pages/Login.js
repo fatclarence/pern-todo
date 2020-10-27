@@ -25,7 +25,7 @@ const Login = () => {
                 console.log(data.username);
                 setToken(data.token);
                 setContextUsername(data.username);
-                toast.success("Welcome Back " + data.username);
+                toast.success("Welcome back " + data.username + "!");
             })
             .catch(error => {
                 toast.error(error.response.data.error);
