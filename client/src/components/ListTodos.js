@@ -16,6 +16,7 @@ const ListTodos = () => {
                 todo.todo_id !== id
             ));
             toast.warning("Deleted todo \"" + description + "\"");
+
         } catch(err) {
             console.error(err.message);
         }
@@ -37,7 +38,7 @@ const ListTodos = () => {
     useEffect(() => {
         // every refresh render, execute these functions
         getTodos();
-    }, [todos]);
+    }, []);
 
     return (
         <Fragment>

@@ -50,6 +50,7 @@ const Register = () => {
 
                 setContextUsername(data.username);
                 setToken(data.token);
+                toast.success("Thanks for joining us " + data.username + "!");
             })
             .catch(error => {
                 toast.error(error.response.data.error);

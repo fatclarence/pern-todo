@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Redirect } from "react-router-dom";
+import React from "react";
 import InputTodo from "../components/InputTodo";
 import ListTodos from "../components/ListTodos";
 

@@ -1,10 +1,7 @@
 import React, { Fragment, useState } from "react";
+import { toast } from "react-toastify";
 
 const InputTodo = () => {
-
-    // description here is the state
-    // setDescription is the only way to change to state
-    // useState give the state a default value
     const [description, setDescription] = useState("");
     const onSubmitForm = async e => {
         e.preventDefault();
@@ -12,17 +9,15 @@ const InputTodo = () => {
             // client input texts
             const body = { description };
             
-            // Convert description input from the client side
-            // into something that we can POST
-            // When user click "Add" button the POST requests fires off
-            // and a task is added into our PSQL database
             const response = await fetch("/api/todos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(body)
             });
+            toast.success("Successfully added to your todo list!");
         } catch(err) {
             console.error(err.message);
+            toast.error("There seems to be a problem here, do let Clarence know:)");
         }
     };
 
