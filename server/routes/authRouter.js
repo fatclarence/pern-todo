@@ -5,7 +5,6 @@ const { v4: uuidv4 } = require("uuid");
 const router = express.Router();
 const jwtGenerator = require("../utils/jwtGenerator");
 const validator = require("../utils/validator");
-const authorization = require("../utils/authorization");
 const db = require("../db");
 
 // Registration
@@ -68,8 +67,9 @@ router.post("/register", validator, async (req, res) => {
             ]
         )
         .then(data => {
-            const token = jwtGenerator(data.username);
-            res.status(200).json({ token });
+            const username = data.username;
+            const token = jwtGenerator(username);
+            res.status(200).json({ token, username });
         })
         .catch(error => {
             console.error(error.message);
@@ -102,8 +102,9 @@ router.post("/login", validator, async (req, res) => {
                 return res.status(401).json("Invalid password");
             }
 
-            const token = jwtGenerator(data.user[0].username);
-            res.json({ token });
+            const username = data.user[0].username;
+            const token = jwtGenerator(username);
+            res.json({ token, username });
         })
         .catch(error => {
             console.error(error.message);

@@ -6,6 +6,7 @@ const pool = require("./server/db");
 const PORT = process.env.PORT || 5000;
 const path = require("path");
 const apiRouter = require("./server/apiRouter");
+const frontEndRoutes = require("./client/src/routes/Routes");
 // Run the express library 
 const app = express();
 
@@ -18,6 +19,9 @@ if (process.env.NODE_ENV === "production") {
 }
 
 // ROUTES 
+app.get(Object.values(frontEndRoutes), (req, res) => {
+    res.sendFile(path.join(__dirname, "build/index.html"));
+});
 
 // API endpoints
 app.use("/api", apiRouter);
