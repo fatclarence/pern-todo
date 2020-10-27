@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import InputTodo from "../components/InputTodo";
 import ListTodos from "../components/ListTodos";
 
 
-const Todos = () => {
+const Todos = ({ logout: logout }) => {
     // State and what you are using to change the state
     const[todos, setTodos] = useState([]);
 
@@ -28,6 +29,9 @@ const Todos = () => {
     return (<div className="container">
                 <InputTodo />
                 <ListTodos todos={todos} getTodos={getTodos} setTodos={setTodos} />
+                <Button className="btn btn-danger mr-auto" onClick={logout}>
+                    Logout
+                </Button>
             </div>);
 
 };
