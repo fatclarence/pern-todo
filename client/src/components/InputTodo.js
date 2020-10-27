@@ -15,6 +15,7 @@ const InputTodo = () => {
                 body: JSON.stringify(body)
             });
             toast.success("Successfully added to your todo list!");
+            
         } catch(err) {
             console.error(err.message);
             toast.error("There seems to be a problem here, do let Clarence know:)");

@@ -2,9 +2,9 @@ import React, { Fragment, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import EditTodo from "./EditTodo";
 
-const ListTodos = () => {
+const ListTodos = ({ todos: todos, getTodos: getTodos, setTodos=setTodos }) => {
     // State and what you are using to change the state
-    const[todos, setTodos] = useState([]);
+    // const[todos, setTodos] = useState([todos]);
 
     // Delete function
     const deleteTodo = async(id, description) => {
@@ -22,24 +22,11 @@ const ListTodos = () => {
         }
     }
 
-    const getTodos = async() => {
-        try {
-            // grab data from server, fetch is a get request
-            const response = await fetch("/api/todos");
-            // Have to parse because receiving json data
-            const jsonData = await response.json();
-            // Set the state of todos on the client side to whatever was fetched during the first render
-            setTodos(jsonData);
-        } catch(err) {
-            console.error(err.message);
-        }
-    }
-
     useEffect(() => {
         // every refresh render, execute these functions
         getTodos();
-    }, []);
-
+    }, [todos]);
+    
     return (
         <Fragment>
             <table className="table mt-5 text-center">
